@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "FunctionalMeetup", "FunctionalMeetup\FunctionalMeetup.fsproj", "{966347B6-07AC-4106-8F9C-4C95885912F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{966347B6-07AC-4106-8F9C-4C95885912F7}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{966347B6-07AC-4106-8F9C-4C95885912F7}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{966347B6-07AC-4106-8F9C-4C95885912F7}.Release|iPhone.ActiveCfg = Release|iPhone
+		{966347B6-07AC-4106-8F9C-4C95885912F7}.Release|iPhone.Build.0 = Release|iPhone
+		{966347B6-07AC-4106-8F9C-4C95885912F7}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{966347B6-07AC-4106-8F9C-4C95885912F7}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{966347B6-07AC-4106-8F9C-4C95885912F7}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{966347B6-07AC-4106-8F9C-4C95885912F7}.Debug|iPhone.Build.0 = Debug|iPhone
+	EndGlobalSection
+EndGlobal
