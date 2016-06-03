@@ -4,6 +4,8 @@ open System
 
 [<Measure>]
 type km
+[<Measure>]
+type deg
 
 type Meetup =
     {
@@ -24,8 +26,8 @@ and Person =
 and Location =
     {
         Time : DateTimeOffset
-        Latitude : float
-        Longitude : float
+        Latitude : float<deg>
+        Longitude : float<deg>
     }
     static member ( - ) (x : Location, y : Location) =
         {
@@ -51,6 +53,15 @@ type AppData =
         Friends : Person[]
         Meetups : Meetup[]
     }
+    static member Initial =
+        {
+            User = { Id = ""; Name = "" }
+            AuthToken = ""
+            Settings = { ShareLocation = false }
+            Location = { Time = DateTimeOffset.Now; Latitude = 0.0<deg>; Longitude = 0.0<deg> }
+            Friends = [||]
+            Meetups = [||]
+        }
     
 and AppSettings =
     {
