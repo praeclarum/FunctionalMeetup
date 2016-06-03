@@ -54,6 +54,7 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="AppData.fs" />
     <Compile Include="AppRepo.fs" />
+    <Compile Include="ViewModels.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.FSharp.targets" />
 </Project>
