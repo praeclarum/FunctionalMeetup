@@ -6,7 +6,7 @@
     <ProjectGuid>{966347B6-07AC-4106-8F9C-4C95885912F7}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{F2A71F9B-5D33-465A-A702-920D77279786}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FunctionalMeetup</RootNamespace>
+    <RootNamespace>FunctionalMeetup.iOS</RootNamespace>
     <AssemblyName>FunctionalMeetup</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
   </PropertyGroup>
@@ -112,6 +112,12 @@
   <ItemGroup>
     <Compile Include="AppDelegate.fs" />
     <Compile Include="Main.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FunctionalMeetup.Core\FunctionalMeetup.Core.fsproj">
+      <Project>{9D463F17-CF5A-410F-993D-DCDE470E69B4}</Project>
+      <Name>FunctionalMeetup.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.FSharp.targets" />
 </Project>

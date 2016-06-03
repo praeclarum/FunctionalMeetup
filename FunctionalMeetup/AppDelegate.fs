@@ -1,4 +1,4 @@
-﻿namespace FunctionalMeetup
+﻿namespace FunctionalMeetup.iOS
 
 open System
 
