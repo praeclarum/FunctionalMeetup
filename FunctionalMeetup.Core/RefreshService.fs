@@ -2,7 +2,7 @@
 
 open System
 
-type RefreshService (repo:AppRepo, client:IMeetupClient) =
+type RefreshService (client:IMeetupClient, repo:AppRepo) =
     let updatePeriod = 5000<ms>
     
     member this.RefreshAsync () =

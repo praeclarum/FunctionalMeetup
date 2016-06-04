@@ -17,7 +17,7 @@ type AppDelegate () =
     let cmds = UserCommands (client, repo)
 
     let refresherCancel = new Threading.CancellationTokenSource ()
-    let refresher = RefreshService (repo, client)
+    let refresher = RefreshService (client, repo)
 
     override val Window = null with get, set
 
