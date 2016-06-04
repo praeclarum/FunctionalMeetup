@@ -15,7 +15,9 @@ type Meetup =
         Invitations : (Person * InvitationStatus)[]
     }
 
-and InvitationStatus = Accepted of Location | NotAccepted
+and InvitationStatus =
+    | Accepted of Location option
+    | NotAccepted
 
 and Person =
     {
