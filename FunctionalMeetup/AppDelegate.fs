@@ -11,18 +11,25 @@ open FunctionalMeetup
 type AppDelegate () =
     inherit UIApplicationDelegate ()
 
+    let initialUser : Person = { Name = "Sally"; Id = "1" }
+    let client = TestMeetupClient ([| initialUser |])
+    let repo = AppRepo { AppData.Initial with User = initialUser }
+    let cmds = UserCommands (client, repo)
+
+    let refresherCancel = new Threading.CancellationTokenSource ()
+    let refresher = RefreshService (repo, client)
+
     override val Window = null with get, set
 
     override this.FinishedLaunching (app, options) =
+        //
+        // Init services
+        //
+        refresher.Start (refresherCancel.Token)
 
         //
-        // Init data
+        // Construct UI
         //
-        let user : Person = { Name = "Sally"; Id = "1" }
-        let client = TestMeetupClient ([| user |])
-        let repo = AppRepo { AppData.Initial with User = user }
-        let cmds = UserCommands (client, repo)
-
         let tabs = new UITabBarController ()
         let meetupList = new MeetupListController (cmds)
 

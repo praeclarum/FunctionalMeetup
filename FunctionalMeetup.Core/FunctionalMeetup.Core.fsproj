@@ -57,6 +57,7 @@
     <Compile Include="ViewModels.fs" />
     <Compile Include="MeetupClient.fs" />
     <Compile Include="UserCommands.fs" />
+    <Compile Include="RefreshService.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.FSharp.targets" />
 </Project>

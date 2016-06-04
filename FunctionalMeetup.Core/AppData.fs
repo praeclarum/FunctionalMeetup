@@ -6,6 +6,8 @@ open System
 type km
 [<Measure>]
 type deg
+[<Measure>]
+type ms
 
 type Meetup =
     {

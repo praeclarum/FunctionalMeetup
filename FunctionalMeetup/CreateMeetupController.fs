@@ -22,7 +22,8 @@ type CreateMeetupController (cmds : UserCommands) =
         async {
             try
                 let name, loc = this.GetMeetupFromUI ()
-                do! cmds.CreateMeetupAsync cmds.Repo.Data.User.Id name loc
+                do! cmds.CreateMeetupAsync cmds.Repo.Data.User.Id 
+                                           name loc
                 this.DismissViewController (true, null)
             with e ->
                 this.ShowError ("Create Meetup Failed", e)
