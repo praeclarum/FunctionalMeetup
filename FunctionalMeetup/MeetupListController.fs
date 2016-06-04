@@ -7,9 +7,11 @@ open UIKit
 open FunctionalMeetup
 open FunctionalMeetup.ViewModels
 
-type MeetupListController (repo : AppRepo) =
+type MeetupListController (cmds : UserCommands) =
     inherit UITableViewController (Title = "Meetups")
-    
+
+    let repo = cmds.Repo
+
     let mutable viewModel = None
 
     let mutable sub = None
@@ -31,6 +33,15 @@ type MeetupListController (repo : AppRepo) =
         base.ViewDidDisappear (a)
         sub |> Option.iter (fun x -> x.Dispose ())
         sub <- None
+
+    override this.ViewDidLoad () =
+        base.ViewDidLoad ()
+        this.NavigationItem.RightBarButtonItem <-
+            new UIBarButtonItem (UIBarButtonSystemItem.Add, fun s e ->
+                let vc = new CreateMeetupController (cmds)
+                let nc = new UINavigationController (vc)
+                this.PresentViewController (nc, true, null)
+                ())
 
     override this.NumberOfSections (tv) = nint 1
 

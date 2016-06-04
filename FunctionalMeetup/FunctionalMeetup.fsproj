@@ -93,6 +93,7 @@
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="MonoTouch.Dialog-1" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json" />
@@ -109,6 +110,7 @@
     <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateMeetupController.fs" />
     <Compile Include="MeetupListController.fs" />
     <Compile Include="AppDelegate.fs" />
     <Compile Include="Main.fs" />

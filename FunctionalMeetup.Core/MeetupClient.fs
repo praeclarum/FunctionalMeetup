@@ -12,9 +12,9 @@ type IMeetupClient =
     //abstract GetFriendsAsync : string -> Async<Person[]>
 
 
-type TestMeetupClient () =
+type TestMeetupClient (initialPeople) =
     let mutable meetups = [||]
-    let mutable people = [||]
+    let mutable people = initialPeople
 
     let findPersonAsync personId =
         async {

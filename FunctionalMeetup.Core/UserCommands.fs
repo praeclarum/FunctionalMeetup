@@ -11,7 +11,9 @@ type Validation =
         | _ -> ()
         
 type UserCommands (client : IMeetupClient, repo:AppRepo) =
-    
+
+    member this.Repo = repo
+
     member this.ValidateCreateMeetup (name : string) =
         if String.IsNullOrWhiteSpace (name) then
             Invalid "Name must be given"

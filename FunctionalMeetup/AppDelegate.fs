@@ -15,11 +15,16 @@ type AppDelegate () =
 
     override this.FinishedLaunching (app, options) =
 
-        let repo = AppRepo AppData.Initial
+        //
+        // Init data
+        //
+        let user : Person = { Name = "Sally"; Id = "1" }
+        let client = TestMeetupClient ([| user |])
+        let repo = AppRepo { AppData.Initial with User = user }
+        let cmds = UserCommands (client, repo)
 
         let tabs = new UITabBarController ()
-
-        let meetupList = new MeetupListController (repo)
+        let meetupList = new MeetupListController (cmds)
 
         tabs.SetViewControllers ([|
                                     new UINavigationController (meetupList)
