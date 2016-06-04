@@ -5,6 +5,11 @@ Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "FunctionalMeetup", "Functio
 EndProject
 Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "FunctionalMeetup.Core", "FunctionalMeetup.Core\FunctionalMeetup.Core.fsproj", "{9D463F17-CF5A-410F-993D-DCDE470E69B4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{06A46DE7-BAB5-4059-883F-AF5E1BEE39F9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
