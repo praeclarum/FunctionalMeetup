@@ -822,13 +822,15 @@ Fits well with decoupling data, services, and UI
 
 ---
 
-# Questions?
+# Thank you!
 
-### Thank you!
+## *
 
-### @praeclarum
+https://github.com/praeclarum/FunctionalMeetup
 
-On Twitter
+## *
+
+@praeclarum
 
 
 
