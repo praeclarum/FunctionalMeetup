@@ -20,3 +20,8 @@ needed by the app.
 Platform independent code is separated into a `Core` library.
 
 
+## Presentation
+
+This code was described in detail in my NDC Oslo 2016 talk.
+
+[Markdown version of the slides](slides/index.md)
