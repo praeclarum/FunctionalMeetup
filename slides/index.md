@@ -14,7 +14,7 @@
 
 Frank A. Krueger
 
-June 8, 2016 - NDC
+June 8, 2016 - NDC Oslo
 
 *If you love programming, you're in the right room.*
 
@@ -235,6 +235,21 @@ Apply FP techniques to the GUI by not being pure,
 
 but we want benefits
 
+---
+
+### OOP GUI
+
+![OOP GUI](images/OOPGUI.png)
+
+---
+
+### Functional GUI
+
+![OOP GUI](images/FPGUI.png)
+
+
+
+
 
 
 
@@ -258,6 +273,12 @@ FUNCTIONAL
 
 ---
 
+## https://github.com/praeclarum/FunctionalMeetup
+
+![XamarinStudio](images/XamarinStudio.png)
+
+---
+
 ## Meetup App 
 
     type Meetup =
@@ -267,7 +288,9 @@ FUNCTIONAL
             Location : Location
             Invitations : (Person * InvitationStatus)[]
         }
-    and InvitationStatus = Accepted of Location | NotAccepted
+    and InvitationStatus =
+        | Accepted of Location
+        | NotAccepted
     and Person =
         {
             Id : string
@@ -276,8 +299,8 @@ FUNCTIONAL
     and Location =
         {
             Time : DateTimeOffset
-            Latitude : float
-            Longitude : float
+            Latitude : float<deg>
+            Longitude : float<deg>
         }
 
 ---
@@ -631,7 +654,7 @@ Same pattern as UI objects!
 * Constrain mutation to a single app object
 
 * Use functions to create view models from app data
-    - Great from cross platform and testing 
+    - Great for cross platform and testing 
 
 * Establish a pattern for UI objects to follow to
     - Keep them fresh
@@ -680,7 +703,11 @@ and write services that achieve those goals
 
 ### An IDE
 
-On key press:
+![Continuous](images/Continuous.jpg)
+
+---
+
+#### On Key Press
 
 1. Syntax Color
 2. Code Completion
@@ -712,7 +739,7 @@ Instead of doing operations:
 
 1. Queue them in the AppData
 
-2. Services can dequeue them and execute
+2. Services can execute and dequeue them
 
 This is CQRS and fits very naturally into this architecture.
 
@@ -747,7 +774,7 @@ Gives a transaction log - commits and rollbacks
 
 Find out which service caused problems by scanning this log
 
-Even record branches fo full git-like history
+Even record branches for full git-like history
 
 ---
 
@@ -787,21 +814,103 @@ Fits well with decoupling data, services, and UI
 
 ---
 
+## ReactiveX
+
+"Rx = Observables + LINQ + Schedulers" 
+
+http://reactivex.io
+
+![ReactiveX](images/ReactiveX.png)
+
+---
+
 ## React.js
+
+"The V in MVC"
+
+"One-way reactive data flow"
+
+http://facebook.github.io/react/
+
+![ReactJS](images/ReactJS.png)
+
+---
+
+### Based on Reactive Components
+
+Each component:
+
+1. Is a container for subcomponents that it generates with a function
+2. Is immutable with respect to contstruction time "properties"
+3. Some (rare) mutation is allowed of "state" for interactivity
+4. Can efficiently be cached by checking if properties changed
+
+---
+
+### Isn't that inefficient?
+
+Problem: HTML has same problems as native mobile apps: you can't keep
+recreating the UI
+
+Solution: "Shadow DOM" is generated and then merged with real DOM
+
+---
+
+### Use React
+
+http://drone.mecha.parts
+
+F# App using React.js
+
+![DroneBuilder](images/DroneBuilder.png)
 
 ---
 
 ## Elm
 
+A Haskell for writing web apps
+
+"the best of functional programming in your browser"
+
+http://elm-lang.org
+
+![Elm](images/Elm.png)
+
 ---
 
-## Reactive .NET
+### Elm Architecture
 
+"A simple pattern for infinitely nestable components"
 
+Each component:
 
+1. Defines a "Model" type
+2. Defines a "View" function
+3. Defines an "Update" function
+    - Different updates defined with "Messages"
+    
+* Also uses a shadow DOM
 
+---
 
+### Elm Example in F#
 
+    type Model = int
+
+    type UpdateMsg =
+        | Increment
+        | Decrement
+
+    let update msg model =
+        match msg with
+        | Reset -> model - 1
+        | AddOne -> model + 1
+
+    let view model =
+        div [] [ button [onClick Increment] [text, "+"]
+                 div [] [text (model.ToString())]
+                 button [onClick Decrement] [text, "-"] ]
+        
 
 
 
@@ -817,7 +926,9 @@ Fits well with decoupling data, services, and UI
 # Conclusion
 
 * Functional Programming is Great!
-* Can be used to solve common mobile app problems
+* Can be used to solve common mobile app problems by
+    - breaking them down into simpler problems
+    - reducing coupling
 * Can be used in small doses, rabbit sized doses, or web scale
 
 ---
