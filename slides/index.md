@@ -350,6 +350,20 @@ When the app needs to "change":
     type AppRepo (initialData : AppData) =
     
         let mutable data = initialData
+        
+        member this.Data = data
+
+        /// The only way to change the app data
+        member this.UpdateData (newData) =
+            data <- newData
+            
+---
+
+## Coordintate Updates with Events
+
+    type AppRepo (initialData : AppData) =
+    
+        let mutable data = initialData
         let updatedData = Event<unit> ()
         
         member this.Data = data
@@ -362,6 +376,29 @@ When the app needs to "change":
             data <- newData
             updatedData.Trigger ()
             
+---
+
+### Free Undo and Redo
+
+Instead of
+
+    data <- newData
+
+Save the history
+
+    let mutable history = [ initialData ]
+    let mutable historyIndex = 0
+    
+    member this.Data = history.[historyIndex]
+    member this.UpdateData _ =
+        //...
+        history <- newData :: history
+        historyIndex <- 0
+        
+    member this.Undo () =
+        historyIndex <- historyIndex + 1
+        updatedData.Trigger
+
 ---
             
 ### Transactional Updates
@@ -380,29 +417,6 @@ When the app needs to "change":
         if updated then
             Task.Run updatedData.Trigger |> ignore
             
----
-
-### Free Undo and Redo
-
-Instead of
-
-    data <- newData
-
-Save the history
-
-    let mutable history = [ initialData ]
-    let mutable historyIndex = 0
-    
-    member this.Data = history.[historyIndex]
-    member this.UpdateData _ =
-        ...
-        history <- newData :: history
-        historyIndex <- 0
-        
-    member this.Undo () =
-        historyIndex <- historyIndex + 1
-        ThreadPool.QueueUserWorkItem updatedData.Trigger
-
 ---
 
 ## Generating UI
@@ -472,21 +486,19 @@ Create UI objects in OOP style and bind them to *View Models*
 
 ### Make View Models
 
-    type AppRepo with
-        member this.MakeMeetupList () =
-            let data = this.Data
-            let makeItem (m : Meetup) =
-                {
-                    Title = m.Name
-                    BackgroundColor =
-                        let distance = m.Location - data.Location
-                        if distance.IsNear then Colors.Green
-                        else Colors.Clear
-                }            
+    let makeMeetupList (data : AppData) =
+        let makeItem (m : Meetup) =
             {
-                Title = "My Meetups"
-                Items = data.Meetups |> Array.map makeItem
-            }
+                Title = m.Name
+                BackgroundColor =
+                    let distance = m.Location - data.Location
+                    if distance.IsNear then Colors.Green
+                    else Colors.Clear
+            }            
+        {
+            Title = "My Meetups"
+            Items = data.Meetups |> Array.map makeItem
+        }
         
 ---
 
@@ -494,7 +506,7 @@ Create UI objects in OOP style and bind them to *View Models*
 
 1. Create with the function needed to generate its view model from the app data
 
-2. Monitor the *UpdatedData* event for changes
+2. Monitor the *AppRepo.UpdatedData* event for changes
 
     * When the data changes, reload the view model
     * Compare the new view model against the last one
@@ -507,12 +519,13 @@ Create UI objects in OOP style and bind them to *View Models*
 #### Meetup List
 
     type MeetupListController (repo : AppRepo) =
-        inherit UITableViewController ()
-        
+        inherit UITableViewController (Title = "Meetups")
+
         let mutable viewModel = None
-        
+
         member this.UpdateViewModel () =
-            let newViewModel = Some (repo.MakeMeetupList ())
+            let data = repo.Data
+            let newViewModel = Some (ViewModels.makeMeetupList data)
             if viewModel <> newViewModel then
                 this.BeginInvokeOnMainThread (fun () ->
                     viewModel <- newViewModel
@@ -523,6 +536,7 @@ Create UI objects in OOP style and bind them to *View Models*
             sub <- Some (repo.UpdatedData.Subscribe
                         this.UpdateViewModel)
             this.UpdateViewModel ()
+
 ---
 
 #### Immutability FTW

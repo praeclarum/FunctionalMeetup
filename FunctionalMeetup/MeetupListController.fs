@@ -8,7 +8,7 @@ open FunctionalMeetup
 open FunctionalMeetup.ViewModels
 
 type MeetupListController (cmds : UserCommands) =
-    inherit UITableViewController (Title = "Meetups")
+    inherit UITableViewController ()
 
     let repo = cmds.Repo
 
@@ -17,10 +17,12 @@ type MeetupListController (cmds : UserCommands) =
     let mutable sub = None
     
     member this.UpdateViewModel () =
-        let newViewModel = Some (repo.MakeMeetupList ())
+        let data = repo.Data
+        let newViewModel = Some (ViewModels.makeMeetupList data)
         if viewModel <> newViewModel then
             this.BeginInvokeOnMainThread (fun () ->
                 viewModel <- newViewModel
+                this.Title <- newViewModel.Value.Title
                 this.TableView.ReloadData ())
                 
     override this.ViewDidAppear (a) =
